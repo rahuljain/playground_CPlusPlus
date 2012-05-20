@@ -1,0 +1,196 @@
+/*
+Programme written by :-
+Rishabh Mehta
+XII-D		2003-04
+
+This program operates on a pointer array
+created dynamically.
+*/
+
+#include <iostream.h>
+#include <conio.h>
+#include <process.h>
+
+class pointer
+{
+ int *iptr;
+ void sort();
+ void disp();
+ void search();
+
+ public:
+ pointer();
+};
+
+int n;
+
+pointer::pointer()
+{
+ iptr=new int[100];
+ cout<<"Enter the number of elements wanted:";
+ cin>>n;
+ cout<<"Enter the elements:";
+ for(int i=0;i<n;i++)
+ cin>>*(iptr+i);
+
+ //MENU
+ char ch;
+
+ cout<<"1.SORT";
+ cout<<"\n2.SEARCH";
+ cout<<"\n3.DISPLAY";
+ cout<<"\n4.EXIT";
+ cout<<"\nEnter your choice:";
+ cin>>ch;
+
+ switch(ch)
+ {
+  case '1':       sort();	break;
+  case '2':       search();	break;
+  case '3':       disp();       break;
+  default :	exit(0);
+ }
+}
+
+void main()
+{
+ clrscr();
+
+ pointer o1;
+
+ getch();
+}
+
+void pointer::sort()
+{
+ for(int i=0;i<n;i++)
+ {
+  for(int j=0;j<i;j++)
+  {
+   if(*(iptr+i)>*(iptr+j))
+   {
+    int temp=*(iptr+i);
+    *(iptr+i)=*(iptr+j);
+    *(iptr+j)=temp;
+   }
+  }
+ }
+
+ for(int p=0;p<n;p++)
+ cout<<*(iptr+p)<<" ";
+}
+
+void pointer::search()
+{
+ int el;
+ cout<<"enter the element:";
+ cin>>el;
+
+ for(int i=0;i<n;i++)
+ if(*(iptr+i)==el)	cout<<i<<" ";
+}
+
+void pointer::disp()
+{
+ for(int i=0;i<n;i++)
+ cout<<*(iptr+i)<<" ";
+}
+
+/*
+	Output:-
+Enter the number of elements wanted:5
+Enter the elements:1 3 5 3 6
+
+1.SORT
+2.SEARCH
+3.DISPLAY
+4.EXIT
+
+Enter your choice:1
+6 5 3 3 1
+-------------------------
+Enter your choice:2
+enter the element:3
+1 3
+---------------------
+Enter your choice:3
+1 3 5 3 6
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+
+                                                                                
+                                                                                
+                                                                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,111 @@
+//Program to read the details of an employee and display
+//his payslip
+
+//made by Akshat Mathur, XII-D
+#include <iostream.h>
+#include <conio.h>
+#include <stdio.h>
+class basic
+{
+	public:
+	long basic;
+	float da, hra;
+	long it;
+	long carl;
+};
+
+
+class emp : public basic
+{
+	float tot_sal, tot_ded, net_sal;
+	public:
+	void tsal()
+	{
+		tot_sal = basic + (da*basic) + (hra*basic);
+	}
+	void tded()
+	{
+		tot_ded = (it/12) + carl;
+	}
+	void nsal()
+	{
+		net_sal = tot_sal - tot_ded;
+	}
+	void n_sal()
+	{
+		cout<<net_sal;
+	}
+};
+
+
+class det : public emp
+{
+	public:
+	char name[30];
+	int no;
+	char de[20];
+	char add[50];
+	det()
+	{
+		cout<<"Name: ";
+		gets(name);
+		cout<<"Employee no: ";
+		cin>>no;
+		cout<<"Designation: ";
+		gets(de);
+		cout<<"Address: ";
+		gets(add);
+	}
+	void sal()
+	{
+		da = 0.105;
+		hra = 0.30;
+		cout<<"Enter basic salary (Rs): ";
+		cin>>basic;
+		cout<<"Enter income tax: ";
+		cin>>it;
+		cout<<"Enter car loan repayment: ";
+		cin>>carl;
+	}
+};
+
+
+void main()
+{
+	clrscr();
+	det a;
+	a.sal();
+	a.tsal();
+	a.tded();
+	a.nsal();
+	cout<<"\n\n\n\t\t**\tPAY SLIP\t**\n";
+	cout<<"\nEmployee no: "<<a.no;
+	cout<<"\nName: "<<a.name;
+	cout<<"\nDesignation: "<<a.de;
+	cout<<"\nAddress: "<<a.add;
+	cout<<"\nNet Salary: ";
+	a.n_sal();
+	getch();
+}
+
+/* OUTPUT:
+   Name: Ankit Jain
+   Employee no: 12
+   Designation: Managing Director
+   Address: 10, Lodhi Road, New Delhi
+   Enter basic salary (Rs): 20000
+   Enter income tax: 1200
+   Enter car loan repayment: 2000
+
+
+
+				**      PAY SLIP        **
+
+   Employee no: 12
+   Name: Ankit Jain
+   Designation: Managing Director
+   Address: 10, Lodhi Road, New Delhi
+   Net Salary: 26000
+
+*/
+

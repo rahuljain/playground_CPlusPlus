@@ -1,0 +1,357 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<process.h>
+//Doubly Linked List.
+
+struct stu
+{
+char name[20];
+int roll;
+stu*next, *prev;
+};
+
+class doub
+{
+stu*st;
+int n;
+public:
+
+doub()
+{
+st=NULL;
+n=0;
+}
+
+void create()
+{
+char ans;
+stu*t=new stu;
+n++;
+cout<<"Name: ";
+gets(t->name);
+cout<<"Roll No.: ";
+cin>>t->roll;
+t->next=NULL;
+t->prev=NULL;
+st=t;
+
+cout<<"Do u wanna enter more? ";
+cin>>ans;
+
+if(ans=='y')
+{
+char opt;
+while(opt=='y')
+{
+n++;
+stu*temp;
+cout<<"Name: ";
+gets(temp->name);
+cout<<"Roll No.: ";
+cin>>temp->roll;
+temp->next=NULL;
+temp->prev=NULL;
+
+t->next=temp;
+temp->prev=t;
+t=t->next;
+cout<<"Continue? ";
+cin>>opt;
+}
+}
+}
+
+void disp()
+{
+stu*t=st;
+while(t!=NULL)
+{
+cout<<"Name: "<<t->name<<endl;
+cout<<"Roll No.: "<<t->roll<<endl<<endl;
+t=t->next;
+}
+getch();
+}
+
+void insrt()
+{
+int k;
+stu*t=new stu;
+cout<<"Name: ";
+gets(t->name);
+cout<<"Roll No.: ";
+cin>>t->roll;
+t->next=NULL;
+t->prev=NULL;
+
+cout<<"At what position do u wanna insert? ";
+cin>>k;
+n++;
+if(k==1)
+{
+t->next=st;
+st->prev=t;
+st=t;
+}
+else
+{
+stu*temp=st;
+for(int i=1; i<k-1; i++)
+temp=temp->next;
+
+t->next=temp->next ;
+temp->next->prev=t;
+temp->next=t;
+t->prev=temp;
+}
+disp();
+}
+
+void del()
+{
+int k;
+cout<<"Which node do u wanna delete? ";
+cin>>k;
+
+if(k==1)
+{
+stu*t=st;
+st=t->next;
+delete t;
+st->prev=NULL;
+n--;
+disp();
+}
+
+else
+if(k==n)
+{
+stu*t=st;
+for(int i=1; i<n; i++)
+  t=t->next;
+stu*temp;
+temp=t->prev;
+temp->next=NULL;
+delete t;
+n--;
+disp();
+}
+
+else
+{
+stu*t=st;
+for(int i=1; i<k; i++)
+  t=t->next;
+stu*temp;
+temp=t->prev;
+temp->next=t->next;
+t->next->prev=temp;
+delete t;
+n--;
+disp();
+}
+}
+
+~doub()
+{
+while(st!=NULL)
+{
+stu*t=st;
+delete t;
+st=st->next;
+}
+}
+
+};
+
+void main()
+{
+clrscr();
+doub obj;
+int opt;
+do
+{
+cout<<"1.create, 2.display, 3.insert node, 4.delete node, 5.exit: ";
+cin>>opt;
+switch(opt)
+{
+case 1:obj.create();
+break;
+case 2:obj.disp();
+break;
+case 3:obj.insrt();
+break;
+case 4:obj.del();
+break;
+case 5:exit(0);
+}
+}while(opt!=5);
+
+}
+
+/*
+
+//Linklist.
+
+struct stu
+{
+int roll;
+char name[50];
+stu*next;
+};
+
+class linklist
+{
+stu*st;
+
+public:
+linklist()
+{
+st=NULL;
+}
+
+void create()
+{
+stu*t=new stu;
+
+if(st==NULL)
+ st=t;
+
+char ans;
+do
+{
+cout<<"Roll No: ";
+cin>>t->roll;
+cout<<"Name: ";
+gets(t->name);
+t->next=NULL;
+
+cout<<"Do you wanna continue? ";
+cin>>ans;
+
+stu*tmp;
+if(ans=='y')
+{
+tmp=t;
+t=new stu;
+tmp->next=t;
+}
+}while(ans=='Y'||ans=='y');
+}
+
+void disp()
+{
+stu*t=st;
+while(t!=NULL)
+{
+cout<<"Name: "<<t->name<<endl;
+cout<<"Roll No. :"<<t->roll<<endl<<endl;
+t=t->next;
+}
+getch();
+}
+
+void ins()
+{
+stu*t=new stu;
+int k;
+cout<<"At what position do u wanna enter the node? ";
+cin>>k;
+cout<<"Roll No.: ";
+cin>>t->roll;
+cout<<"Name: ";
+gets(t->name);
+t->next=NULL;
+
+if(k==1)
+{
+t->next=st;
+st=t;
+}
+
+else
+{
+int a=1;
+stu*temp=st;
+while(a<k-1)
+{
+temp=temp->next;
+a++;
+}
+stu*tmp=temp->next;
+temp->next=t;
+t->next=tmp;
+}
+disp();
+}
+
+void dele()
+{
+int k;
+cout<<"Which node do u wanna delete? ";
+cin>>k;
+stu*temp=new stu;
+
+if(k==1)
+{
+temp=st;
+st=st->next;
+delete temp;
+}
+else
+{
+int a=1;
+temp=st;
+stu*prev;
+while(a<k)
+{
+prev=temp;
+temp=temp->next;
+a++;
+}
+prev->next=temp->next;
+delete temp;
+}
+disp();
+}
+
+~linklist()
+{
+stu*temp;
+while(st!=NULL)
+{
+temp=st->next;
+delete st;
+st=temp;
+}
+}
+};
+
+void main()
+{
+clrscr();
+linklist obj;
+int opt;
+do
+{
+cout<<" 1.create, 2.display, 3.insert, 4.delete, 5.exit : ";
+cin>>opt;
+switch(opt)
+{
+case 1:obj.create();
+break;
+case 2:obj.disp();
+break;
+case 3:obj.ins();
+break;
+case 4:obj.dele();
+break;
+case 5:exit(0);
+}
+}while(opt!=5);
+//getch();
+}
+
+
+*/

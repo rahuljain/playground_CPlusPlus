@@ -1,0 +1,10 @@
+#include<stdio.h>
+main()
+{
+float base,height,area;
+clrscr();
+base=5.5;
+height=7.5;
+area=0.5*base*height;
+printf("\nAREA OF THE TRINGLE IS=%f",area);
+}

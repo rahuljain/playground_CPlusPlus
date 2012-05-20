@@ -1,0 +1,145 @@
+/*
+Programme written by :-
+Rishabh Mehta
+XII-D		2003-04
+
+This program operates for a shop in which one can
+initilize,purchase,delete & display.
+*/
+
+#include<iostream.h>
+#include<conio.h>
+#include<process.h>
+#include<stdio.h>
+#include<ctype.h>
+
+class Item
+{
+ char name[10][20];
+ int item_code[10];
+ int price[10];
+ int stock[10];
+ int i;
+
+ public:
+ void initilize();
+ void purchase();
+ void dlete();
+ void display(int,int);
+ void display();
+};
+
+Item Item1;
+
+void main()
+{
+ clrscr();
+
+ cout<<"Initilize :-"<<endl<<endl;
+ Item1.initilize();
+ char ch;
+
+ cout<<endl<<endl;
+ cout<<"What will you like to do?"<<endl;
+ cout<<"1)To purchse an item"<<endl;
+ cout<<"2)To delete an item"<<endl;
+ cout<<"3)To display the details of all items "<<
+       "with stock less than 5"<<endl;
+ cout<<"4)Exit.";
+ ch=getch();
+
+ switch(ch)
+ {
+  case '1':Item1.purchase();
+  case '2':Item1.dlete();
+  case '3':Item1.display();
+  case '4':exit(0);
+ }
+ getch();
+}
+
+void Item :: initilize()
+{
+ clrscr();
+ char ch;
+ i=0;
+
+ do
+ {
+  cout<<endl<<endl;
+  cout<<"Input Item code : ";
+  cin>>item_code[i];
+  cout<<"Input Name : ";
+  cin>>name[i];
+  cout<<"Input price per unit : ";
+  cin>>price[i];
+  cout<<"Input stock : ";
+  cin>>stock[i];
+  i++;
+
+  cout<<endl<<"Do you want to continue?";
+  ch=toupper(getch());
+
+ }while(ch=='Y');
+}
+
+void Item :: purchase()
+{
+ int a,b,c;
+ cout<<endl<<endl;
+ cout<<"Enter the item code : ";
+ cin>>a;
+ cout<<"Enter the quantity to be purchased : ";
+ cin>>b;
+
+ for(int j=0;j<i;j++)
+ if(item_code[j]==a)	{
+			 c=stock[j]-b;
+			 if(c<0)	{
+					 cout<<"Error !!!\tReinput\t"
+					     <<"Out of stock\a";
+					 getch();
+					 purchase();
+					}
+			 else		{
+					 stock[j]=c;
+					 display(j,b);
+					}
+			 break;
+			}
+ else                   {
+			 cout<<"Error !!!\tReinput\t"
+			     <<"\tOut of stock\a";
+			 getch();
+			 purchase();
+			}
+}
+
+void Item :: dlete()
+{
+ ;
+}
+
+void Item :: display(int i,int b=0)
+{
+ cout<<endl<<endl;
+ cout<<"\t\t-------------------------------------"<<endl;
+ cout<<"\t\tI.Code\tI.Name\tPrice\tQty.\tTotal"<<endl;
+ cout<<"\t\t-------------------------------------";
+ cout<<endl<<"\t\t"<<item_code[i]<<'\t'<<name[i]<<'\t'<<price[i]
+	   <<'\t'<<b<<'\t'<<price[i]*b<<endl;
+ cout<<"\t\t-------------------------------------";
+ getch();
+}
+
+void Item :: display()
+{
+  for(int j=0;j<i;j++)
+  {
+   if(stock[j]<5)
+   {
+    cout<<endl<<endl<<"Stock < 5 !!!!!!"<<endl;
+    display(j);
+   }
+  }
+ }

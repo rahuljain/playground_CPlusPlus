@@ -1,0 +1,336 @@
+#include <fstream.h>
+#include <iomanip.h>
+#include <stdio.h>
+#include <conio.h>
+fstream f;
+char file[30];
+struct b{
+int n;
+char t[40];
+float p;
+int s;
+}x,x1;
+void c()
+{
+f.close();
+}
+
+void cc()
+{
+	f.open(file,ios::out);
+	c();
+}
+void o(int q=0)
+{
+	if (q==1)
+	f.open(file,ios::out);
+	if(q==2)
+	f.open(file,ios::app);
+	if(q==3)
+	f.open(file,ios::in|ios::out);
+}
+void write(b te)
+{
+	f.write((char*) &te,sizeof(te));
+}
+void read(b &te)
+{
+	f.read((char*) &te,sizeof(te));
+}
+
+void in(int i,int j,int k)
+{
+	if(i==0)
+	{
+	cout<<"enter book number ";
+	cin>>x1.n;
+	}
+	if(j==0)
+	{
+	cout<<"enter title ";
+	gets(x1.t);
+	cout<<"price ";
+	cin>>x1.p;
+	//cout<<"enter stock ";
+	//cin>>x1.s;
+	}
+	if(k==0)
+	{cout<<"enter number of books ";
+	cin>>x1.s;
+	}
+}
+
+void out(b y)
+{
+	cout<<setw(7)<<y.n<<setw(40)<<y.t<<setw(20)<<y.p
+	    <<setw(10)<<y.s<<endl;
+}
+int search(int r=0,int t=1)
+{
+	c();
+	o(3);
+	in(0,1,1);
+	int i=0;
+	read(x);
+	while(f)
+	{
+
+		if(x.n==x1.n)
+		{
+			if(r==0)
+			out(x);
+			if(t==0)
+			c();
+			return i;
+		}
+		i++;
+		read(x);
+	}
+	cout<<" book not found \n";
+	if(t==0)
+	c();
+	return -1;
+}
+add()
+{
+	o(2);
+	in(0,0,0);
+	write(x1);
+	c();
+}
+
+int edit(int t=0)
+{
+	cout<<"enter details of book\n";
+	int i=search(0);
+	if(i==-1)
+	return 1;
+	if(t==0)
+	{
+		cout<<"enter new details of book\n";
+		in(0,0,0);
+	}
+	else
+	{
+		x1=x;
+		in(1,1,0);
+		x1.s+=x.s;
+	}
+	f.seekg((i*(sizeof(x1))),ios::beg);
+	write(x1);
+	c();
+}
+
+purchase()
+{
+	b list[20];
+	int btot[20];
+	int co=0;
+
+	int tot=0;
+	char a='y';
+	while(a=='y')
+	{
+		cout<<"enter detailes of book\n";
+		int i=search(0);
+		if(i==-1)
+		continue;
+		in(1,1,0);
+		f.seekg(i*sizeof(x1),ios::beg);
+		if (x1.s>x.s)
+		cout<<"too few books";
+		else
+		{
+			list[co]=x;
+			x.s-=x1.s;
+			list[co].s=x1.s;
+			tot+=btot[co]=list[co].s*list[co].p;
+			co++;
+			write(x);
+		}
+		c();
+		cout<<"do you wish to purchase more?\n";
+		a=getch();
+	}
+	cout<<"total bill is\n"<<setw(7)<<"book no"<<setw(30)<<"book name"
+	    <<setw(6)<<"price"<<setw(10)<<"Qty"<<setw(10)<<"subtotal"<<endl;
+	for(int i=0;i<co;i++)
+	cout<<setw(7)<<list[i].n<<setw(30)<<list[i].t<<setw(6)<<list[i].p
+	    <<setw(10)<<list[i].s<<setw(10)<<btot[i]<<endl;
+	cout<<"total bill is "<<tot<<endl;;
+}
+void show()
+{
+	o(3);
+	cout<<setw(7)<<"book no"<<setw(40)<<"book name"
+	    <<setw(20)<<"price"<<setw(10)<<"Qty"<<endl;
+	read(x);
+	while(f)
+	{
+		out(x);
+		read(x);
+	}
+	c();
+}
+
+
+int main()
+{
+	clrscr();
+	cout<<"enter file to use: ";
+	gets(file);
+	char a='y';
+	while(a=='y'||a=='Y')
+	{
+		cout<<"enter choice\n1.clear 
+file\n2.add\n3.edit\n4.purchase\n5.update\n6.showall\n7.search\n8.exit\n";
+		a=getche();
+		cout<<endl;
+		switch(a)
+		{
+			case '1':cc();break;
+			case '2':add();break;
+			case '3':edit();break;
+			case '4':purchase();break;
+			case '5':edit(1);break;
+			case '6':show();break;
+			case '7':search(0,0);break;
+			case '8':return 1;
+			default :cout<<"reenter\n";
+		}
+		cout<<"do you wish to continue\n";
+		fflush(stdin);
+		a=getch();
+	}
+	getch();
+}
+/*
+enter file to use: book.bk
+enter choice
+1.clear file
+2.add
+3.edit
+4.purchase
+5.update
+6.showall
+7.search
+8.exit
+2
+enter book number 1
+enter title Lord of the rings
+price 300
+enter number of books 250
+do you wish to continue
+enter choice
+1.clear file
+2.add
+3.edit
+4.purchase
+5.update
+6.showall
+7.search
+8.exit
+2
+enter book number 2
+enter title Let us C
+price 120
+enter number of books 100
+do you wish to continue
+enter choice
+1.clear file
+2.add
+3.edit
+4.purchase
+5.update
+6.showall
+7.search
+8.exit
+2
+enter book number 3
+enter title Pradeep's Physics
+price 400
+enter number of books 30
+do you wish to continue
+enter choice
+1.clear file
+2.add
+3.edit
+4.purchase
+5.update
+6.showall
+7.search
+8.exit
+6
+book no                               book name               price       
+Qty
+      1                       Lord of the rings                 300       
+250
+      2                                Let us C                 120       
+100
+      3                       Pradeep's Physics                 400        
+30
+do you wish to continue
+enter choice
+1.clear file
+2.add
+3.edit
+4.purchase
+5.update
+6.showall
+7.search
+8.exit
+4enter detailes of book
+enter book number 1
+      1                       Lord of the rings                 300       
+250
+enter number of books 12
+do you wish to purchase more?
+enter detailes of book
+enter book number 2
+      2                                Let us C                 120       
+100
+enter number of books 30
+do you wish to purchase more?
+enter detailes of book
+enter book number 3
+      3                       Pradeep's Physics                 400        
+30
+enter number of books 40
+too few books
+do you wish to purchase more?
+total bill is
+book no                     book name price       Qty  subtotal
+      1             Lord of the rings   300        12      3600
+      2                      Let us C   120        30      3600
+total bill is 7200
+do you wish to continue
+enter choice
+1.clear file
+2.add
+3.edit
+4.purchase
+5.update
+6.showall
+7.search
+8.exit
+5
+enter details of book
+enter book number 3
+      3                       Pradeep's Physics                 400        
+30
+enter number of books 20
+do you wish to continue
+enter choice
+1.clear file
+2.add
+3.edit
+4.purchase
+5.update
+6.showall
+7.search
+8.exit
+do you wish to continue
+
+
+
+*/

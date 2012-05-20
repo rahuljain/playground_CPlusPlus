@@ -1,0 +1,34 @@
+#include<stdio.h>
+main()
+{
+int a;
+clrscr();
+printf("Enter Code:");
+scanf("%d",&a);
+if(a==1)
+{
+printf("Red");
+}
+else
+{
+if(a==2)
+{
+printf("Green");
+}
+else
+{
+if(a==3)
+{
+printf("Yellow");
+}
+else
+{
+if(a==4)
+{
+printf("Blue");
+}
+}
+}
+}
+getch();
+}

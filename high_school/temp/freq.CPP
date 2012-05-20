@@ -1,0 +1,47 @@
+#include<iostream.h>
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void main()
+{
+clrscr();
+char str[50];
+cout<<"Enter the string: ";
+gets(str);
+
+for(int l=0; str[l]!='\0'; l++);          // length of the string = l.
+
+for(int i=0; i<l; i++)
+{
+  int n=1, flag=1;
+
+  if(i>0)
+  {
+     for(int k=i-1; k>=0; k--)            //checking if the current letter has
+					  //already been counted.
+       {
+	  if(str[k]==str[i])
+	  flag=0;
+       }
+  }
+
+ if(flag==1)
+ {
+  for(int j=i+1; j<l; j++)
+   {
+      if(str[i]==str[j])
+      n++;
+   }
+  if(str[i]==' ')
+    cout<<endl<<"blank"<<"      "<<n<<endl;
+  else
+    cout<<endl<<str[i]<<"       "<<n<<endl;
+ }
+
+ else;
+
+}
+
+getch();
+}

@@ -1,0 +1,81 @@
+/*
+Programme written by :-
+Rishabh Mehta
+XII-D		2003-04
+
+This program randomly generates lottery Numbers
+*/
+
+#include <iostream.h>
+#include <stdlib.h>
+#include <conio.h>
+
+struct Tickets
+{
+ int Number;
+ char Name[10];
+ char Address[20];
+};
+
+void main()
+{
+ clrscr();
+ Tickets o1[5];
+
+ int temp[3];
+
+ for(int i=0;i<5;i++)
+ {
+  cout<<"Number :";cin>>o1[i].Number;
+  cout<<"Name   :";cin>>o1[i].Name;
+  cout<<"Address:";cin>>o1[i].Address;
+  cout<<endl;
+ }
+
+ randomize();
+
+ for(int j=0;j<3;j++)
+ {
+  temp[j]=o1[random(5)].Number;
+  for(int p=0;p<j;p++)
+  {
+   if(temp[j]==temp[p])	j--;
+  }
+ }
+
+ for(int h=0;h<3;h++)
+ {
+  cout<<"Winners "<<h+1<<" : ";
+  cout<<temp[h]<<"\t";
+  cout<<o1[temp[h-1]].Name<<"\t";
+  cout<<o1[temp[h-1]].Address;
+  cout<<endl;
+ }
+ getch();
+}
+/*
+	Output:-
+Number :1
+Name   :Rishabh
+Address:Delhi
+
+Number :2
+Name   :Tanmoy
+Address:Kanpur
+
+Number :3
+Name   :Sameer
+Address:Mumbai
+
+Number :4
+Name   :Bharat
+Address:Patna
+
+Number :5
+Name   :Nitish
+Address:Kolkata
+
+Winners 1 : 5     Nitish  Kolkata
+Winners 2 : 2     Tanmoy  Kanpur
+Winners 3 : 3     Sameer  Mumbai
+*/

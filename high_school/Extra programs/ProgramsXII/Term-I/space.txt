@@ -1,0 +1,92 @@
+//written by ankita
+//corrected partially by adithya
+
+
+
+# include <fstream.h>
+# include <string.h>
+# include <conio.h>
+# include <stdio.h>
+
+void main()
+{ clrscr();
+	fstream f;
+	char fname[15], line[50], ans;
+	cout<<" Filename ? : ";
+	gets(fname);
+
+	f.open(fname, ios::out);
+	do
+	{ cout<<" Enter line of song: \n " ;
+	  gets(line);
+	  f.write((char*)&line, sizeof(line));
+	  cout<<" continue? : ";
+	  cin>>ans;
+	}while(ans == 'y');
+	f.close();
+
+	f.open(fname, ios::in);
+	f.read((char*)&line, sizeof(line));
+	while(f)
+	{ cout<<line<<endl;
+	  f.read((char*)&line, sizeof(line));
+	}
+	f.close();
+
+	f.open(fname, ios::out|ios::in);
+	int l = 0;
+	f.read((char*)&line, sizeof(line));
+	while(f)
+	{ l++;
+	  for ( int i = 0; line[i] != '*' ; i++)
+	   {	if ( line[i] == ' ' )
+		   { for (int j = i; j < 50; j++)
+			line[j] = line[j+1];
+		    }
+	   }
+	  f.seekp((l-1)*sizeof(line), ios::beg);
+	  f.write((char*)&line, sizeof(line));
+	  f.read((char*)&line, sizeof(line));
+	 }
+	 f.close();
+
+	 cout<<"\n Modified: ";
+	 f.open(fname, ios::in);
+	 f.read((char*)&line, sizeof(line));
+	while(f)
+	{ cout<<'\n'<<line<<endl;
+	  f.read((char*)&line, sizeof(line));
+	}
+	f.close();
+   getch();
+}
+
+/* OUTPUT:
+
+Filename ? : song.txt
+Enter line of song:
+So no one told you life was gonna be this way
+continue? : y
+Enter line of song:
+your jobs a joke
+continue? : y
+Enter line of song:
+your broke
+continue? : y
+Enter line of song:
+your love lifes DOA
+continue? : n
+So no one told you life was gonna be this way
+your jobs a joke
+your broke
+your love lifes DOA
+
+Modified:
+Sonoonetoldyoulifewasgonnabethisway
+yourjobsajoke
+yourbroke
+yourlovelifesDOA
+
+*/
+
+

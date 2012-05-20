@@ -1,0 +1,56 @@
+#include<stdio.h>
+main()
+{
+char sn[100],fn[100],s[100],cl[100],r[100];
+int sm,mm,em,sum;
+float per;
+clrscr();
+printf("Student's name    :");
+scanf("%s",&sn);
+printf("Father's name     :");
+scanf("%s",&fn);
+printf("Enter the class   :");
+scanf("%s",&cl);
+printf("Enter the section :");
+scanf("%s",&s);
+printf("Enter The Roll No.:");
+scanf("%s",&r);
+printf("Science marks     :");
+scanf("%d",&sm);
+printf("Maths marks       :");
+scanf("%d",& mm);
+printf("English marks     :");
+scanf("%d",& em);
+sum = sm+mm+em;
+per = (sum*100)/300;
+clrscr();
+printf("  \n");
+printf("  \n");
+printf("  \n");
+printf("                             MARKSHEET \n");
+printf("  \n");
+printf("  \n");
+printf("  \n");
+printf("                  Student's Name    : %s \n",sn);
+printf("                  Father's Name     : %s \n",fn);
+printf("                  Class             : %s \n",cl);
+printf("                  Section           : %s \n",s);
+printf("                  Roll No.          : %s \n",r);
+printf("                  SCIENCE's MARKS   : %d \n",sm);
+printf("                  MATHS MARKS       : %d \n",mm);
+printf("                  ENGLISH MARKS     : %d \n",em);
+printf("                  THE PERCENTAGE IS : %f",per);
+getch();
+}
+
+
+
+
+
+
+
+
+
+
+
+

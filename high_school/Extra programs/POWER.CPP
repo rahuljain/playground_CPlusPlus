@@ -1,0 +1,81 @@
+/*
+Programme written by :-
+Rishabh Mehta
+XII-D		2003-04
+
+This progarm uses a function overloading
+for the power of an integer or a double.
+*/
+
+#include<iostream.h>
+#include<conio.h>
+
+double power(double,int);
+double power(int,int);
+
+void main()
+{
+ clrscr();
+
+ char ch;
+
+ cout<<endl;
+ cout<<"Type 1,for Integer."<<endl;
+ cout<<"Type 2,for Double."<<endl;
+ ch=getch();
+
+ if (ch=='1')		{
+			 int n,p;
+			 double q;
+
+			 cout<<endl<<"Input n & p : ";
+			 cin>>n>>p;
+
+			 q=power(n,p);
+
+			 cout<<endl<<"Output : "<<q;
+			}
+ else 		        {
+			 int p;
+			 double n,q;
+
+			 cout<<endl<<"Input n & p : ";
+			 cin>>n>>p;
+
+			 q=power(n,p);
+
+			 cout<<endl<<"Output : "<<q;
+			}
+
+ getch();
+}
+
+double power(double n,int p=2)
+{
+ double q=n;
+
+ for(int i=0;i<p-1;i++)
+ q*=n;
+
+ return q;
+}
+
+double power(int n,int p=2)
+{
+ double q=n;
+
+ for(int i=0;i<p-1;i++)
+ q*=n;
+
+ return q;
+}
+
+/*
+	Output:-
+Type 1,for Integer.
+Type 2,for Double.
+
+Input n & p : 2 5
+
+Output : 32
+*/

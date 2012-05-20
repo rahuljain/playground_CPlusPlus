@@ -1,0 +1,73 @@
+//This program finds out the volume.
+//Program created by Rahul Jain.
+
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+
+struct S
+{
+int f;
+int i;
+};
+
+float convert(S len,S bre, S hi)
+{
+float l=(len.f*12)+len.i;
+float b=(bre.f*12)+bre.i;
+float h=(hi.f*12)+hi.i;
+return l*b*h;
+}
+
+void main()
+{
+clrscr();
+S l,b,h;
+float vol;
+cout<<"Enter the length: "<<endl;
+cout<<"Feet: ";
+cin>>l.f;
+cout<<"inches: ";
+cin>>l.i;
+
+cout<<endl<<"Enter the breadth: "<<endl;
+cout<<"Feet: ";
+cin>>b.f;
+cout<<"inches:";
+cin>>b.i;
+cout<<endl;
+
+cout<<"Enter the height: "<<endl;
+ cout<<"Feet: ";
+ cin>>h.f;
+ cout<<"Inches: ";
+ cin>>h.i;
+ cout<<endl;
+
+ float volume=convert(l,b,h);
+ cout<<"The volume is "<<volume<<" cubic inches";
+ getch();
+
+
+}
+
+
+/*
+
+Output:
+
+Enter the length:
+Feet: 3
+inches: 4
+
+Enter the breadth:
+Feet: 6
+inches:3
+
+Enter the height:
+Feet: 8
+Inches: 4
+
+The volume is:300000cubic inches
+
+*/

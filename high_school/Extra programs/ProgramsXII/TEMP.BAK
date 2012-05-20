@@ -1,0 +1,105 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<process.h>
+
+//Stacks.
+class arr
+{
+int ar[100], top;
+
+public:
+arr()
+{
+top=-1;
+}
+
+void push()
+{
+cout<<"Enter the element: ";
+int n;
+cin>>n;
+if(top==99)
+{
+cout<<"Stack overflow";
+return;
+}
+else
+ar[++top]=n;
+}
+
+void pop()
+{
+if(top==-1)
+cout<<"Empty stack";
+
+else
+{
+cout<<"Element popped: "<<ar[top];
+top--;
+}
+getch();
+}
+
+void disp()
+{
+if(top==-1)
+cout<<"Empty stack";
+else
+{
+for(int i=top; i>=0; i--)
+cout<<ar[i]<<" ";
+}
+getch();
+}
+};
+
+void main()
+{
+clrscr();
+arr obj1, obj2;
+int opt;
+do
+{
+ cout<<"1.Array implemented stack. \n2.Link implemented stack. \n3.Exit? ";
+  cin>>opt;
+ switch(opt)
+   {
+      int ans;
+	case 1:
+	       do
+		{
+		  cout<<" \n1. PUSH \n2. POP \n3. DISPLAY \n4. EXIT ";
+		   cin>>ans;
+		  switch(ans)
+		     {
+			case 1:obj1.push();
+			break;
+			case 2:obj1.pop();
+			break;
+			case 3:obj1.disp();
+			break;
+			case 4:exit(0);
+		     }
+		}while(ans!=4);
+	break;
+
+	case 2:
+	       do
+		{
+		   cout<<" \n1. PUSH \n2. POP\n3. EXIT";
+		    cin>>ans;
+		   switch(ans)
+		     {
+			case 1:obj2.push();
+			break;
+			case 2:obj2.pop();
+			break;
+			case 3:exit(0);
+		     }
+		}while(ans!=3);
+	break;
+ }
+}while(opt!=3);
+}
+

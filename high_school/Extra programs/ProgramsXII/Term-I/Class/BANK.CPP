@@ -1,0 +1,84 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+
+class bank
+{
+long int accno;
+float balance;
+
+void update(float amt)
+{
+balance+=amt;
+display();
+}
+
+void display()
+{
+cout<<"\nYour balance is: "<<balance;
+}
+
+public:
+
+void info()
+{
+cout<<"Account number? ";
+cin>>accno;
+balance=1000;
+}
+
+float amt1, amt2;
+void deposit()
+{
+cout<<"How much amount do you want to deposit? ";
+cin>>amt1;
+update(amt1);
+}
+
+void withdraw()
+{
+cout<<"How much amount do u wanna withdraw? ";
+cin>>amt2;
+update(-amt2);
+}
+
+int ac()
+{
+return accno;
+}
+
+};
+
+void main()
+{
+clrscr();
+bank user[3];
+int acno, opt;
+
+for(int j=0; j<3; j++)
+{
+user[j].info();
+}
+
+clrscr();
+cout<<"Enter your account number: ";
+cin>>acno;
+cout<<"\nWhat do you want to do? ";
+cout<<"\n1.Withdraw"<<"\n2.Deposit";
+cout<<"\nEnter your choice? ";
+cin>>opt;
+for(int i=0; i<3; i++)
+{
+if(user[i].ac()==acno)
+ {
+  switch(opt)
+    {
+     case 1:user[i].withdraw();
+     break;
+     case 2:user[i].deposit();
+     break;
+     }
+ }
+}
+getch();
+}

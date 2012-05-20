@@ -1,0 +1,137 @@
+/*
+Programme written by :-
+Rishabh Mehta
+XII-D		2003-04
+
+Perform various string functions as well as ctype function.
+*/
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<math.h>
+#include<process.h>
+
+char a[50],b[50];
+
+//void copy();
+void upper();
+void lower();
+void strlen();
+void strcpy();
+void strcmp();
+void strcat();
+
+void main()
+{
+ clrscr();
+
+ cout<<"Input a string to be operated : ";
+ gets(a);
+
+ char ch;
+
+ Start:
+ cout<<endl<<endl;
+ cout<<"1. upper()"<<endl;
+ cout<<"2. lower()"<<endl;
+ cout<<"3. strlen()"<<endl;
+ cout<<"4. strcpy()"<<endl;
+ cout<<"5. strcmp()"<<endl;
+ cout<<"6. strcat()"<<endl;
+ cout<<"7. Exit."<<endl;
+
+ ch=getch();
+
+ switch(ch)
+ {
+  case '1':upper(); getch();clrscr();goto Start;
+  case '2':lower(); getch();clrscr();goto Start;
+  case '3':strlen();getch();clrscr();goto Start;
+  case '4':strcpy();getch();clrscr();goto Start;
+  case '5':strcmp();getch();clrscr();goto Start;
+  case '6':strcat();getch();clrscr();goto Start;
+  case '7':exit(0);
+ }
+ getch();
+
+}
+
+void upper()
+{
+ for(int i=0;a[i]!='\0';i++)
+ {
+  if((a[i]>90))
+  {
+   a[i]=a[i]-32;
+  }
+ }
+ cout<<endl<<endl;
+ puts(a);
+}
+
+void lower()
+{
+ for(int i=0;a[i]!='\0';i++)
+ {
+  if((a[i]>90))
+  {
+   a[i]=a[i]+32;
+  }
+ }
+ cout<<endl<<endl;
+ puts(a);
+}
+
+void strlen()
+{
+ for(int i=0;a[i]!='\0';i++);
+ cout<<endl<<endl<<"Length of the string is "<<i<<'.';
+}
+
+void strcpy()
+{
+ for(int i=0;a[i]!='\0';i++);
+ cout<<endl<<endl<<"A string to be copied : ";
+ gets(b);
+
+ for(int j=0;b[j]!='\0';j++,i++)
+ a[i]=b[j];
+
+ puts(a);
+}
+
+void strcmp()
+{
+ int x,c,m;
+
+ cout<<endl<<endl<<"A string to be compared : ";
+ gets(b);
+
+ for(int i=0;a[i]!='\0';i++);
+ m=i;
+ for(i=0;i<m;i++)
+ {
+  if(a[i]!=b[i])  	{
+			 x=0;
+			 break;
+			}
+ }
+
+ if(x==0)	        c=abs(a[i]-b[i]);
+ cout<<"The difference is : "<<c;
+}
+
+void strcat()
+{
+ cout<<endl<<endl<<"A string to be copied : ";
+ gets(b);
+
+ for(int i=0;a[i]!='\0';i++);
+ for(int j=0;b[j]!='\0';j++);
+
+ for(int I=0;I<j;I++)
+ a[i+I]=b[I];
+
+ a[i+j]='\0';
+ puts(a);
+}

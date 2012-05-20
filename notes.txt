@@ -1,0 +1,32 @@
+the static_cast operator:
+intVar += doubleVar
+is same as
+intVar = static_cast<int>(static_cast<double>(intVar)+doubleVar);
+
+the const_cast operator:
+used to undo the const-ness of a pointer type.
+consider the example:
+function(char *s); -- this function doesnt modify the string  that is passed to it.
+now we call it:
+const hello[] = "HEllo world";
+function(hello);
+this gives a warning: passing const char * as argument1 of funtion(char *) 
+
+this can be prevented by making the function call as follows:
+function(const_cast<char *>(hello));
+
+Providing default arguments:
+Arguments must be known at compile-time, since at that moment arguments are supplied to functions. Therefore, the default arguments must be mentioned in the function's declaration, rather than in its implementation:
+
+    // sample header file
+    extern void two_ints(int a = 1, int b = 4);
+
+    // code of function in, say, two.cc
+    void two_ints(int a, int b)
+    {
+        ...
+    }
+
+Note that supplying the default arguments in function definitions instead of in function declarations in header files is incorrect: when the function is used in other sources the compiler will read the header file and not the function definition. Consequently, in those cases the compiler has no way to determine the values of default function arguments. Current compilers may generate errors when detecting default arguments in function definitions. 
+
+

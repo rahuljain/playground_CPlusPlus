@@ -1,0 +1,343 @@
+//Program created by Rahul Jain.
+//How to calculate Max Marks???
+#include<fstream.h>
+#include<string.h>
+#include<stdio.h>
+#include<conio.h>
+#include<process.h>
+
+struct stu
+{
+int adm_no, clas, strm_code;
+char sec, name[10], dob[15], fa_name[10], add[15], sex ;
+};
+
+struct adm
+{
+int adm_no;
+char div[10];
+float sub1, sub2, sub3, sub4, sub5, total, avg;
+};
+
+fstream f1;
+fstream f2;
+int n=0;
+
+class report
+{
+stu ob1;
+adm ob2;
+
+public:
+
+	void create()
+	     {
+		f1.open("STUDENT.dat",ios::out);
+		f1.close();
+		cout<<"File named STUDENT.dat created.";
+
+		f2.open("RESULT.dat", ios::out);
+		f2.close();
+		cout<<"\nFile named RESULT.dat created.\n";
+		getch();
+	     }
+
+	void append()
+	     {
+		f1.open("STUDENT.dat", ios::app);
+		f2.open("RESULT.dat", ios::app);
+		   char opt;
+		   do
+		     {
+			n++;
+			cout<<"Enter the admission number: ";
+			cin>>ob1.adm_no;
+			cout<<"Class: ";
+			cin>>ob1.clas;
+			cout<<"Section: ";
+			cin>>ob1.sec;
+			cout<<"Name: ";
+			gets(ob1.name);
+			cout<<"Date of Birth: ";
+			gets(ob1.dob);
+			cout<<"Father's name: ";
+			gets(ob1.fa_name);
+			cout<<"Address: ";
+			gets(ob1.add);
+			cout<<"Sex: ";
+			cin>>ob1.sex;
+			cout<<"Stream code:"<<endl<<"1:Science with Economics \n2:Science with Computers \n3:Science with Biology \n4:Commerce with Maths \n5:Commerce without Maths \n6:Humanities"<<endl;
+			cout<<"Enter your Stream Code: ";
+			cin>>ob1.strm_code;
+			f1.write((char*)&ob1, sizeof(ob1));
+
+			ob2.adm_no=ob1.adm_no;
+			cout<<"Enter your marks in: "<<endl;
+			cout<<"Subject 1: ";
+			cin>>ob2.sub1;
+			cout<<"Subject 2: ";
+			cin>>ob2.sub2;
+			cout<<"Subject 3: ";
+			cin>>ob2.sub3;
+			cout<<"Subject 4: ";
+			cin>>ob2.sub4;
+			cout<<"Subject 5: ";
+			cin>>ob2.sub5;
+
+			ob2.total = ob2.sub1 + ob2.sub2 + ob2.sub3 + ob2.sub4 + ob2.sub5;
+			ob2.avg=ob2.total/5;
+
+			if(ob2.sub1>=33 && ob2.sub2>=33 && ob2.sub3>=33 && ob2.sub4>=33 && ob2.sub5>=33 && ob2.avg>=60)
+			strcpy(ob2.div,"First");
+			else
+			if(ob2.sub1>=33 && ob2.sub2>=33 && ob2.sub3>=33 && ob2.sub4>=33 && ob2.sub5>=33 && ob2.avg>=50 && ob2.avg<60)
+			strcpy(ob2.div,"Second");
+			else
+			if(ob2.sub1>=33 && ob2.sub2>=33 && ob2.sub3>=33 && ob2.sub4>=33 && ob2.sub5>=33 && ob2.avg<50)
+			strcpy(ob2.div,"Third");
+			else
+			if(ob2.sub1>=33 || ob2.sub2>=33 || ob2.sub3>=33 || ob2.sub4>=33 || ob2.sub5>=33)
+			strcpy(ob2.div,"Compart.");
+			else
+			strcpy(ob2.div,"Fail");
+
+			f2.write((char*)&ob2, sizeof(ob2));
+
+			cout<<endl<<"Do you want to enter more data? ";
+			cin>>opt;
+		      }
+		       while(opt=='y'||opt=='Y');
+
+		   f1.close();
+		   f2.close();
+	     }
+
+	void display1()
+	{
+	 stu temp1;
+	 adm temp2;
+	 f1.open("STUDENT.dat",ios::in);
+	 f1.read((char*)&temp1, sizeof(temp1));
+	 f2.open("RESULT.dat",ios::in);
+	 f2.read((char*)&temp2, sizeof(temp2));
+	 while(f1)
+	 {
+	  cout<<"\nAdmission Number: "<<temp1.adm_no;
+	  cout<<"\nClass: "<<temp1.clas<<" "<<temp1.sec;
+	  cout<<"\nName: "<<temp1.name;
+	  cout<<"\nStream: "<<temp1.strm_code;
+	  cout<<"\nMarks1: "<<temp2.sub1;
+	  cout<<"\nMarks2: "<<temp2.sub2;
+	  cout<<"\nMarks3: "<<temp2.sub3;
+	  cout<<"\nMarks4: "<<temp2.sub4;
+	  cout<<"\nMarks5: "<<temp2.sub5;
+	  cout<<"\nDivision: "<<temp2.div;
+	  f1.read((char*)&temp1,sizeof(temp1));
+	  f2.read((char*)&temp2, sizeof(temp2));
+	 }
+	 f1.close();
+	 f2.close();
+	 getch();
+	}
+
+	void display2()
+	{
+	 stu t1;
+	 adm t2;
+	 cout<<"contents of f1: ";
+	 f1.open("STUDENT.dat",ios::in);
+	 f1.read((char*)&t1, sizeof(t1));
+	 while(f1)
+	 {
+	  cout<<"\nAdmission Number: "<<t1.adm_no;
+	  cout<<"\nClass: "<<t1.clas<<" "<<t1.sec;
+	  cout<<"\nName: "<<t1.name;
+	  cout<<"\nStream Code: "<<t1.strm_code;
+	  cout<<"\nDate of Birth: "<<t1.dob;
+	  cout<<"\nFather's Name: "<<t1.fa_name;
+	  cout<<"\nAddress: "<<t1.add;
+	  f1.read((char*)&t1, sizeof(t1));
+	}
+	 f1.close();
+
+	 f2.open("RESULT.dat", ios::in) ;
+	 f2.read((char*)&t2, sizeof(t2));
+	 while(f2)
+	 {
+	  cout<<"\nAdmission Number: "<<t2.adm_no;
+	  cout<<"\nMarks1: "<<t2.sub1;
+	  cout<<"\nMarks2: "<<t2.sub2;
+	  cout<<"\nMarks3: "<<t2.sub3;
+	  cout<<"\nMarks4: "<<t2.sub4;
+	  cout<<"\nMarks5: "<<t2.sub5;
+	  cout<<"\nDivision: "<<t2.div;
+	  cout<<"\nTotal: "<<t2.total;
+	  cout<<"\nAverage: "<<t2.avg;
+	  f2.read((char*)&t2, sizeof(t2));
+	}
+	 f2.close();
+	}
+
+   /*                                  //Maximum Marks.
+	 stu tmp1;
+	 adm tmp2;
+
+	 f1.open("STUDENT.dat", ios::in);
+	 f1.read((char*)&tmp1, sizeof(tmp1));
+	 tmp1.strm_code=temp1.strm_code;
+
+	 float max1=0, max2=0, max3=0, max4=0, max5=0;
+
+	 f2.open("RESULT.dat", ios::in);
+
+	 f2.read((char*)&tmp2, sizeof(tmp2));
+	 while(f2)
+	 {
+
+	    if(tmp2.sub1>max1)
+	    max1=temp2.sub1;
+
+	    if(tmp2.sub2>max2)
+	    max2=temp2.sub2;
+
+	    if(tmp2.sub3>max3)
+	    max3=temp2.sub3;
+
+	    if(tmp2.sub4>max4)
+	    max4=temp2.sub4;
+
+	    if(tmp2.sub5>max)
+	    max5=temp2.sub5;
+	}
+
+     */
+
+	void display()
+	    {
+		stu temp1;
+		adm temp2;
+
+		char subj1[20]="English";
+		char subj2[20], subj3[20], subj4[20], subj5[20];
+
+		int adno, n1=0, flag=0;
+		cout<<"Give the admission number of the student whose report card you want to print: ";
+		cin>>adno;
+		f1.open("STUDENT.dat", ios::in);
+		f1.read((char*)&temp1, sizeof(temp1));
+		while(f1 && flag==0)
+		  {
+		    n1++;
+		    if(adno==temp1.adm_no)
+		       flag=1;
+		    f1.read((char*)&temp1, sizeof(temp1));
+		  }
+		f1.close();
+
+		f1.open("STUDENT.dat", ios::in);
+		f1.seekg((n1-1)*sizeof(temp1),ios::beg);
+		f2.open("RESULT.dat", ios::in);
+		f2.seekg((n1-1)*sizeof(temp2),ios::beg);
+		f1.read((char*)&temp1, sizeof(temp1));
+		f2.read((char*)&temp2, sizeof(temp2));
+
+			 cout<<"\t\t\tSARDAR PATEL VIDYALAYA, NEW DELHI"<<endl;
+			 cout<<"Admission No: "<<temp1.adm_no<<"\t\t\t\tClass: "<<temp1.clas<<endl;
+			 cout<<"Name: "<<temp1.name<<endl;
+			 cout<<"-----------------------------------------------------------"<<endl;
+			 cout<<"Subject\t\t\tMax. Marks\t\t\tMarks Obtained"<<endl;
+			 cout<<"-----------------------------------------------------------"<<endl;
+
+			 if(temp1.strm_code==1)
+			   {
+			    strcpy(subj2,"Physics");
+			    strcpy(subj3,"Chem");
+			    strcpy(subj4,"Maths");
+			    strcpy(subj5,"Eco");
+			   }
+			else
+			if(temp1.strm_code==2)
+			   {
+			     strcpy(subj2,"Physics");
+			     strcpy(subj3,"Chem");
+			     strcpy(subj4,"Maths");
+			     strcpy(subj5,"Computers");
+			   }
+			else
+			if(temp1.strm_code==3)
+			   {
+			     strcpy(subj2,"Physics");
+			     strcpy(subj3,"Chem");
+			     strcpy(subj4,"Maths");
+			     strcpy(subj5,"Bio");
+			   }
+
+			else
+			if(temp1.strm_code==4)
+			   {
+			     strcpy(subj2,"sub2");
+			     strcpy(subj3,"sub3");
+			     strcpy(subj4,"Maths");
+			     strcpy(subj5,"sub5");
+			   }
+
+			else
+			if(temp1.strm_code==5)
+			   {
+			     strcpy(subj2,"sub2");
+			     strcpy(subj3,"sub3");
+			     strcpy(subj4,"noMath");
+			     strcpy(subj5,"sub5");
+			   }
+
+			else
+			if(temp1.strm_code==6)
+			   {
+			     strcpy(subj2,"sub2");
+			     strcpy(subj3,"sub3");
+			     strcpy(subj4,"sub4");
+			     strcpy(subj5,"sub5");
+			   }
+
+
+		    cout<<subj1<<"\t\t\t"<<temp2.sub1<<endl;
+		    cout<<subj2<<"\t\t\t"<<temp2.sub2<<endl;
+		    cout<<subj3<<"\t\t\t"<<temp2.sub3<<endl;
+		    cout<<subj4<<"\t\t\t"<<temp2.sub4<<endl;
+		    cout<<subj5<<"\t\t\t"<<temp2.sub5<<endl;
+
+	     f1.close();
+	     f2.close();
+		  // }
+
+	    }
+};
+
+void main()
+{
+clrscr();
+report obj;
+int a;
+char ans1;
+do
+{
+cout<<" \n\n1.Create files. \n2.Append the files. \n3.Display 1. \n4.Display 2. \n5.Display Report \n6.Exit. \n";
+cout<<"Enter your option: ";
+cin>>a;
+cout<<endl;
+switch(a)
+{
+case 1: obj.create();
+break;
+case 2: obj.append();
+break;
+case 3: obj.display1();
+break;
+case 4: obj.display2();
+break;
+case 5: obj.display();
+break;
+case 6:exit(0);
+}
+}while(ans1!=5);
+}

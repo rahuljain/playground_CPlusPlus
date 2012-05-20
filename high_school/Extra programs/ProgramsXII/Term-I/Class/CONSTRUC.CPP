@@ -1,0 +1,37 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<math.h>
+
+class X
+{
+int i;
+
+protected:
+int j;
+
+public:
+int k;
+
+X()                            //constructor
+     {
+       i=0;
+       j=10;
+       k=20;
+     }
+
+void print()
+{
+cout<<i<<endl<<j<<endl<<k<<endl;
+}
+
+};
+
+
+void main()
+{
+clrscr();
+X a;
+a.print();
+getch();
+}
